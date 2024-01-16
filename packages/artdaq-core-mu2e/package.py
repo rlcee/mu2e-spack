@@ -1,0 +1,71 @@
+# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Spack Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
+import os
+import sys
+
+from spack import *
+
+
+def sanitize_environments(env, *vars):
+    for var in vars:
+        env.prune_duplicate_paths(var)
+        env.deprioritize_system_paths(var)
+
+
+class ArtdaqCoreMu2e(CMakePackage):
+    """The toolkit currently provides functionality for data transfer,
+    event building, event reconstruction and analysis (using the art analysis
+    framework), process management, system and process state behavior, control
+    messaging, local message logging (status and error messages), DAQ process
+    and art module configuration, and the writing of event data to disk in ROOT
+    format."""
+
+    homepage = "https://github.com/Mu2e/artdaq_core_mu2e"
+    url = "https://github.com/Mu2e/artdaq_core_mu2e/archive/refs/tags/v1_08_04.tar.gz"
+    git = "https://github.com/Mu2e/artdaq_core_mu2e.git"
+
+    version("develop", branch="develop", get_full_repo=True)
+
+    version("v2_01_02", sha256="cb492dcd67c1676bc78cf251f3541fc583625f8b71f9486e29603f8a104de531")
+    version("v1_09_02", sha256="4a2789b7a2bcff2a30b70562e5543d73f503e02eb6a990aa6bb80ceeec614cbf")
+    version("v1_09_01", sha256="4f1d6097636ed48f2d0fad5b02ef0ddc2e64d3b75e2f1d1cd41bd2b24df62adb")
+    version("v1_08_08", sha256="bfa5a5baf3a9bd2b874f1d0989d73f965b4aec1e820a458b29b5f3668e2a3ff4")
+    version("v1_08_04", sha256="a145f195ebc93a2a20e08bcbc227325b03852c5fe0702cfca3ba92ffd91fb398")
+
+    def url_for_version(self, version):
+        url = "https://github.com/Mu2e/artdaq_core_mu2e/archive/refs/tags/{0}.tar.gz"
+        return url.format(version)
+
+    variant(
+        "cxxstd",
+        default="17",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
+
+    depends_on("cetmodules", type="build")
+
+    depends_on("mu2e-pcie-utils", when="@:v1_09_02")
+    depends_on("artdaq-core")
+
+    def setup_run_environment(self, env):
+        prefix = self.prefix
+        # Ensure we can find plugin libraries.
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
+        # Ensure we can find fhicl files
+        env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Cleaup.
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
+
+    def setup_dependent_run_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Ensure we can find plugin libraries.
+        env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
+        # Ensure we can find fhicl files
+        env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        # Cleaup.
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
