@@ -41,14 +41,19 @@ class Mu2ePcieUtils(CMakePackage):
     )
 
     variant("kmod",default=False,description="Build Kernel modules.")
+    variant("root",default=False,description="Build ROOT interface")
+    variant("python",default=False,description="Build Python bindings")
 
     depends_on("cetmodules", type="build")
     depends_on("messagefacility")
     depends_on("artdaq-core-mu2e", when="@v2_09_01:")
     depends_on("trace")
+    depends_on("root",when="+root")
+    depends_on("swig",when="+python")
+    depends_on("python",when="+python")
 
     def cmake_args(self):
-        args = ["-DWANT_KMOD={0}".format("TRUE" if "+kmod" in self.spec else "FALSE")]
+        args = ["-DWANT_KMOD={0}".format("TRUE" if "+kmod" in self.spec else "FALSE"), "-DBUILD_ROOT_INTERFACE={0}".format("TRUE" if "+root" in self.spec else "FALSE"), "-DBUILD_PYTHON_INTERFACE={0}".format("TRUE" if "+python" in self.spec else "FALSE")]
         return args
 
     def setup_dependent_runtime_environment(self, env):
