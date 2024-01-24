@@ -5,6 +5,12 @@
 
 from spack.package import *
 
+
+def sanitize_environments(env, *vars):
+    for var in vars:
+        env.prune_duplicate_paths(var)
+        env.deprioritize_system_paths(var)
+
 class Offline(CMakePackage):
     """The Mu2e Offline analysis code suite"""
 
