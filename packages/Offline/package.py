@@ -26,14 +26,14 @@ class Offline(CMakePackage):
     variant("g4", default=False, description="Whether to build Geant4-dependent packages")
 
     # Direct dependencies, see ups/product_deps
-    depends_on("geant4") #, when="+g4")
+    depends_on("geant4", when="+g4")
     depends_on("cetmodules", type="build")
     depends_on("artdaq-core-mu2e")
     depends_on("art-root-io")
     depends_on("kinkal")
     depends_on("btrk")
     depends_on("gallery")
-    depends_on("cry")
+    depends_on("cry", when="+g4")
     depends_on("swig", type="build")
     depends_on("gsl")
     depends_on("xerces-c")
