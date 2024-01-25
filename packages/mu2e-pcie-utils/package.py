@@ -17,9 +17,13 @@ class Mu2ePcieUtils(CMakePackage):
     and art module configuration, and the writing of event data to disk in ROOT
     format."""
 
-    homepage = "https://github.com/Mu2e/pcie_linux_kernel_module/"
+    homepage = "https://mu2e.fnal.gov"
     url = "https://github.com/Mu2e/mu2e_pcie_utils/archive/refs/tags/v2_08_00.tar.gz"
     git = "https://github.com/Mu2e/mu2e_pcie_utils.git"
+
+    maintainers("eflumerf", "rrivera747")
+
+    license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
     version("v2_09_01", sha256="de7debf74d81739dbfe3e7d4a7365a4c57ed3150ffd49fb5b5504f410dd469c6")
@@ -47,6 +51,7 @@ class Mu2ePcieUtils(CMakePackage):
     depends_on("cetmodules", type="build")
     depends_on("messagefacility")
     depends_on("artdaq-core-mu2e", when="@v2_09_01:")
+    depends_on("artdaq-core-mu2e", when="@develop")
     depends_on("trace")
     depends_on("root",when="+root")
     depends_on("swig",when="+python")

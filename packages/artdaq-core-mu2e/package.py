@@ -23,9 +23,13 @@ class ArtdaqCoreMu2e(CMakePackage):
     and art module configuration, and the writing of event data to disk in ROOT
     format."""
 
-    homepage = "https://github.com/Mu2e/artdaq_core_mu2e"
+    homepage = "https://mu2e.fnal.gov"
     url = "https://github.com/Mu2e/artdaq_core_mu2e/archive/refs/tags/v1_08_04.tar.gz"
     git = "https://github.com/Mu2e/artdaq_core_mu2e.git"
+
+    maintainers("eflumerf", "rrivera747")
+
+    license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
 

@@ -24,13 +24,19 @@ class OtsdaqMu2e(CMakePackage):
     and art module configuration, and the writing of event data to disk in ROOT
     format."""
 
-    homepage = "https://github.com/Mu2e/otsdaq_mu2e"
+    homepage = "https://mu2e.fnal.gov"
     url = "https://github.com/Mu2e/otsdaq_mu2e/archive/refs/tags/v1_02_02.tar.gz"
     git = "https://github.com/Mu2e/otsdaq_mu2e.git"
 
-    version("develop", branch="develop", get_full_repo=True)
-    version("v1_02_02", commit="92aa08f")
+    maintainers("eflumerf", "rrivera747")
 
+    license("BSD")
+
+    version("develop", branch="develop", get_full_repo=True)
+    version("v1_04_00", sha256="9c5c2b2b39650cf0716f95a2b3b62f71f4f856cf55810e31f1d9b96c6ddd22de")
+    version("v1_03_01", sha256="5b8fb4065ae3733d4280ddb87dd3822637e7ed00f0d7dda9a676abe6921c493d")
+    version("v1_02_02", sha256="19334074df56fed7c81e01d8689a50a8ab456e58e01f8ae83fb2461a32ad316a")
+    
     def url_for_version(self, version):
         url = "https://github.com/Mu2e/otsdaq_mu2e/archive/refs/tags/{0}.tar.gz"
         return url.format(version)

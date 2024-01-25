@@ -26,8 +26,14 @@ class ArtdaqMu2e(CMakePackage):
     url = "https://github.com/Mu2e/artdaq_mu2e/archive/refs/tags/v1_05_02.tar.gz"
     git = "https://github.com/Mu2e/artdaq_mu2e.git"
 
+    maintainers("eflumerf", "rrivera747")
+
+    license("BSD")
+
     version("develop", branch="develop", get_full_repo=True)
-    version("v1_05_02", commit="a66151c")
+    version("v1_07_00", sha256="46ec46069ce45efc69cd9fc3dce8392255d07940fc44e4baac95f10a6c2d2b9e")
+    version("v1_06_01", sha256="b10b287b27bae7c73665809ed67edfe7f692b7435810c0ef476a87ef206de4a0")
+    version("v1_05_02", sha256="480fcd8580a11e08de55dbc0e71a16482e0de0ba23a4ac633ff2e2353877d3be")
 
     def url_for_version(self, version):
         url = "https://github.com/Mu2e/artdaq_mu2e/archive/refs/tags/{0}.tar.gz"
@@ -44,7 +50,7 @@ class ArtdaqMu2e(CMakePackage):
     depends_on("cetmodules", type="build")
 
     depends_on("artdaq")
-    depends_on("artdaq-core-mu2e")
+    depends_on("mu2e-pcie-utils")
 
     def setup_run_environment(self, env):
         prefix = self.prefix

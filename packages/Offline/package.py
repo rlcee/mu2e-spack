@@ -22,6 +22,7 @@ class Offline(CMakePackage):
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
+    version("11.00.01", commit="67f7904d5")
 
     variant("g4", default=False, description="Whether to build Geant4-dependent packages")
 
@@ -44,7 +45,7 @@ class Offline(CMakePackage):
     depends_on("root+tmva-sofie+spectrum")
 
     def cmake_args(self):
-        args = ["WANT_G4={0}".format("TRUE" if "+g4" in self.spec else "FALSE")]
+        args = ["-DWANT_G4={0}".format("TRUE" if "+g4" in self.spec else "FALSE")]
         return args
 
     def setup_run_environment(self, env):
