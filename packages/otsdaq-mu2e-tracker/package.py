@@ -6,6 +6,11 @@
 from spack.package import *
 
 
+def sanitize_environments(env, *vars):
+    for var in vars:
+        env.prune_duplicate_paths(var)
+        env.deprioritize_system_paths(var)
+        
 class OtsdaqMu2eTracker(CMakePackage):
     """FIXME: Put a proper description of your package here."""
 
@@ -18,12 +23,15 @@ class OtsdaqMu2eTracker(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_00_00", sha256="b8edf461f31eeb4852424400878f00cb5604244ab613a6b4ee70601e87bd5a92")
 
     def url_for_version(self, version):
         url = "https://github.com/Mu2e/otsdaq_mu2e_tracker/archive/refs/tags/{0}.tar.gz"
         return url.format(version)
 
     depends_on("otsdaq-mu2e")
+    depends_on("Offline")
+    depends_on("artdaq-core-demo")
 
     def setup_run_environment(self, env):
         prefix = self.prefix

@@ -6,6 +6,11 @@
 from spack.package import *
 
 
+def sanitize_environments(env, *vars):
+    for var in vars:
+        env.prune_duplicate_paths(var)
+        env.deprioritize_system_paths(var)
+        
 class OtsdaqMu2eDqm(CMakePackage):
     """FIXME: Put a proper description of your package here."""
 
@@ -18,6 +23,7 @@ class OtsdaqMu2eDqm(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_00_00", sha256="9a89359a07603c56bb970a0f155260887ef2fb47b4ee90b2f4bf754adbfe9bc5")
     version("v1_04_00", sha256="363762bd66604d961dd6ec1f4f8cc5651e937456153806b942744ffe1d5246a0")
 
     def url_for_version(self, version):
