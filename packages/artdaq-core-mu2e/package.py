@@ -54,7 +54,7 @@ class ArtdaqCoreMu2e(CMakePackage):
 
     depends_on("cetmodules", type="build")
 
-    depends_on("mu2e-pcie-utils", when="@:v1_09_02")
+    depends_on("mu2e-pcie-utils@:v2_09_00", when="@:v1_09_02")
     depends_on("artdaq-core")
 
     def setup_run_environment(self, env):
