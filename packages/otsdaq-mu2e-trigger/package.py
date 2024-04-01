@@ -31,6 +31,7 @@ class OtsdaqMu2eTrigger(CMakePackage):
 
     depends_on("otsdaq-mu2e")
     depends_on("Offline")
+    depends_on("cetmodules", type="build")
 
     def setup_run_environment(self, env):
         prefix = self.prefix

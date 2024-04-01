@@ -30,6 +30,7 @@ class OtsdaqMu2eCalorimeter(CMakePackage):
         return url.format(version)
 
     depends_on("otsdaq-mu2e")
+    depends_on("cetmodules", type="build")
 
     def setup_run_environment(self, env):
         prefix = self.prefix
