@@ -29,7 +29,7 @@ class Offline(CMakePackage):
 
     # Direct dependencies, see ups/product_deps
     depends_on("geant4", when="+g4")
-    depends_on("cetmodules", type="build")
+    depends_on("cetmodules@3.24.00:", type="build")
     depends_on("artdaq-core-mu2e")
     depends_on("art-root-io")
     depends_on("kinkal")
