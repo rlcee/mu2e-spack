@@ -31,7 +31,7 @@ class ArtdaqMu2e(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
-    version("v3_00_00", sha256="d14870609faf6688ec82689cc0b1bb8c9920ab7ac00f06c9e910f1a612a29e90") 
+    version("v3_00_00", commit="32eceebf0806d729421e5e891591b63f6bd38a6f") 
     version("v1_07_00", sha256="46ec46069ce45efc69cd9fc3dce8392255d07940fc44e4baac95f10a6c2d2b9e")
     version("v1_06_01", sha256="b10b287b27bae7c73665809ed67edfe7f692b7435810c0ef476a87ef206de4a0")
     version("v1_05_02", sha256="480fcd8580a11e08de55dbc0e71a16482e0de0ba23a4ac633ff2e2353877d3be")

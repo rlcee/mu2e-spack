@@ -23,7 +23,7 @@ class OtsdaqMu2eExtmon(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
-    version("v3_00_00", sha256="be89ae8bc52135c35f691c7305cbc889bb0135485e424299f37401bf5cafe2e2")
+    version("v3_00_00", commit="5b9c8e67480435dedcfa20724e3c707fcf508f1e")
     version("v1_04_00", sha256="ee06ffed0f1e013a83be9d7387339b8353f8b53db4ed299dc9dd96ce2d8649a9")
 
     def url_for_version(self, version):

@@ -22,7 +22,7 @@ class OtsdaqMu2eCalorimeter(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
-    version("v3_00_00", sha256="fd99f653a708d23e2f8d7328bc3dbdf2b9f242f9ce19f5a3ef400485be6954b3")
+    version("v3_00_00", commit="196933cfc47d5f9d214218fbc7d8e08bf2569f67")
     version("v1_04_00", sha256="7df9ff2c6f1cdf5d13b7b744b38c24f1e7901c7fac07dc64ccacd80736cea5fa")
 
     def url_for_version(self, version):
