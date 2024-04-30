@@ -1,0 +1,46 @@
+# Copyright 2013-2022 Lawrence Livermore National Security, LLC and other
+# Spack Project Developers. See the top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (Apache-2.0 OR MIT)
+
+from spack import *
+
+
+class Mdh(Package):
+    """MDH is specific to Mu2e experiment at Fermilab. It is a layer
+    of scripts which simplifies some data-handling steps for users"""
+
+    homepage = "https://github.com/Mu2e/mdh"
+    url = "https://github.com/Mu2e/mdh/archive/refs/tags/v01_03_00.tar.gz"
+    git = "https://github.com/Mu2e/mdh.git"
+    maintainers = ["rlcee", "kutschke"]
+
+    version("1.3.0", sha256="c4c2fd93e92721cea0062fdd27e19e1dbab68fcdd1f8ac005c3ba1fe9ad854ba")
+    version("1.2.0", sha256="a15f0fe240c56a5ddd12e5587e5b27bb5fdee52ba93637c68c7f6571400205f3")
+    version("1.1.0", sha256="88c3a3e3e4408db9eaf9a9827f24fafb467f0d2ca4d19e606425d3f29f77c994")
+
+    version("develop", branch="main")
+
+    # always take the python from the envset
+    depends_on("python@3.9", type=("run"))
+    depends_on("metacat", type=("run"))
+    depends_on("data-dispatcher", type=("run"))
+    depends_on("rucio-clients", type=("run"))
+    # faked with the link
+    #depends_on("gfal2-python", type=("run"))
+
+    def url_for_version(self, version):
+        url = "https://github.com/Mu2e/Mdh/archive/refs/tags/v{:02d}_{:02d}_{:02d}.tar.gz"
+        aa = str(version.dotted).split('.')
+        return url.format(int(aa[0]),int(aa[1]),int(aa[2]))
+
+    def install(self, spec, prefix):
+        mkdir(prefix.bin)
+        mkdir(prefix.python)
+        install_tree(self.stage.source_path + "/bin", prefix.bin)
+        install_tree(self.stage.source_path + "/python", prefix.python)
+
+    def setup_run_environment(self, env):
+        env.prepend_path("PATH", self.prefix.bin)
+        env.prepend_path("PYTHONPATH", "/usr/lib64/python3.9/site-packages")
+        env.prepend_path("PYTHONPATH", self.prefix + "/python")
