@@ -22,6 +22,7 @@ class OtsdaqMu2eTrigger(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_01_00", commit="10d134e1178895ddf51c5c9aae97e15ebb703740")
     version("v3_00_00", commit="a3b1c45cf41ffc92f455ca5eb07d9623d7f7a4fc")
     version("v1_04_00", sha256="44a92dcb2c5fa5fb0aa8525062e1254768f6617dd4593402dbfb8de67cd11e48")
 
@@ -29,9 +30,27 @@ class OtsdaqMu2eTrigger(CMakePackage):
         url = "https://github.com/Mu2e/otsdaq_mu2e_trigger/archive/refs/tags/{0}.tar.gz"
         return url.format(version)
 
+    variant(
+        "cxxstd",
+        default="20",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
+
     depends_on("otsdaq-mu2e")
     depends_on("Offline")
     depends_on("cetmodules", type="build")
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ]
+        if os.path.exists("CMakePresets.cmake"):
+            args.extend(["--preset", "default"])
+        else:
+            self.define("artdaq_core_OLD_STYLE_CONFIG_VARS", True)
+        return args
 
     def setup_run_environment(self, env):
         prefix = self.prefix

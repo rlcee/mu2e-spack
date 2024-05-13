@@ -33,6 +33,7 @@ class OtsdaqMu2e(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_01_00", commit="e2438814a42ee1a84a2838eb23fc90c2c8b32f2a")
     version("v3_00_00", commit="e49148cbe548865661def8b51f2c5f64cbf66b71")
     version("v1_04_00", sha256="9c5c2b2b39650cf0716f95a2b3b62f71f4f856cf55810e31f1d9b96c6ddd22de")
     version("v1_03_01", sha256="5b8fb4065ae3733d4280ddb87dd3822637e7ed00f0d7dda9a676abe6921c493d")
@@ -44,7 +45,7 @@ class OtsdaqMu2e(CMakePackage):
 
     variant(
         "cxxstd",
-        default="17",
+        default="20",
         values=("14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
@@ -57,6 +58,16 @@ class OtsdaqMu2e(CMakePackage):
     depends_on("otsdaq-components")
     depends_on("otsdaq-epics")
     depends_on("artdaq-mu2e")
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ]
+        if os.path.exists("CMakePresets.cmake"):
+            args.extend(["--preset", "default"])
+        else:
+            self.define("artdaq_core_OLD_STYLE_CONFIG_VARS", True)
+        return args
 
     def setup_run_environment(self, env):
         prefix = self.prefix

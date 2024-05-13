@@ -31,6 +31,7 @@ class ArtdaqMu2e(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_01_00", commit="aaddd212757a9aa47a1b0f3a5269ba7d6a027e5a") 
     version("v3_00_00", commit="32eceebf0806d729421e5e891591b63f6bd38a6f") 
     version("v1_07_00", sha256="46ec46069ce45efc69cd9fc3dce8392255d07940fc44e4baac95f10a6c2d2b9e")
     version("v1_06_01", sha256="b10b287b27bae7c73665809ed67edfe7f692b7435810c0ef476a87ef206de4a0")
@@ -42,7 +43,7 @@ class ArtdaqMu2e(CMakePackage):
 
     variant(
         "cxxstd",
-        default="17",
+        default="20",
         values=("14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
@@ -52,6 +53,16 @@ class ArtdaqMu2e(CMakePackage):
 
     depends_on("artdaq")
     depends_on("mu2e-pcie-utils")
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ]
+        if os.path.exists("CMakePresets.cmake"):
+            args.extend(["--preset", "default"])
+        else:
+            self.define("artdaq_core_OLD_STYLE_CONFIG_VARS", True)
+        return args
 
     def setup_run_environment(self, env):
         prefix = self.prefix

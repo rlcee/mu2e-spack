@@ -26,6 +26,7 @@ class Mu2ePcieUtils(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_01_00", commit="b4d49d749a487b9b3150aa96a149af0b201a3f1b")
     version("v3_00_00", commit="757b66cb792ff5dae6bb1cdff566b60d6cfcfdc0")
     version("v2_09_01", sha256="de7debf74d81739dbfe3e7d4a7365a4c57ed3150ffd49fb5b5504f410dd469c6")
     version("v2_08_05", sha256="2e78e63c9f71b0293b6e09315a17f809b42a40d5bc1e7b2cc4efc8f3b042a79b")
@@ -39,7 +40,7 @@ class Mu2ePcieUtils(CMakePackage):
 
     variant(
         "cxxstd",
-        default="17",
+        default="20",
         values=("14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
@@ -60,7 +61,7 @@ class Mu2ePcieUtils(CMakePackage):
     depends_on("python",when="+python")
 
     def cmake_args(self):
-        args = ["-DWANT_KMOD={0}".format("TRUE" if "+kmod" in self.spec else "FALSE"), "-DBUILD_ROOT_INTERFACE={0}".format("TRUE" if "+root" in self.spec else "FALSE"), "-DBUILD_PYTHON_INTERFACE={0}".format("TRUE" if "+python" in self.spec else "FALSE")]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"), "-DWANT_KMOD={0}".format("TRUE" if "+kmod" in self.spec else "FALSE"), "-DBUILD_ROOT_INTERFACE={0}".format("TRUE" if "+root" in self.spec else "FALSE"), "-DBUILD_PYTHON_INTERFACE={0}".format("TRUE" if "+python" in self.spec else "FALSE")]
         return args
 
     def setup_dependent_runtime_environment(self, env):
