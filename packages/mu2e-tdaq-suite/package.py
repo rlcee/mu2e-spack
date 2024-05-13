@@ -12,6 +12,7 @@ class Mu2eTdaqSuite(BundlePackage):
     """
 
     version("develop")
+    version("v3_01_00")
     version("v3_00_00")
     version("v1_04_00")
     version("v1_02_03")
