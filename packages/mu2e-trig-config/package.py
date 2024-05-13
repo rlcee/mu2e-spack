@@ -5,6 +5,7 @@
 
 
 from spack.package import *
+import os
 
 def sanitize_environments(env, *vars):
     for var in vars:
