@@ -43,7 +43,7 @@ class Offline(CMakePackage):
     # Indirect dependencies (But still required by CMake)
     depends_on("postgresql")
     depends_on("openblas")
-    depends_on("root+tmva-sofie+spectrum+root7")
+    depends_on("root+tmva-sofie+spectrum+opengl")
 
     def cmake_args(self):
         args = ["-DWANT_G4={0}".format("TRUE" if "+g4" in self.spec else "FALSE")]
