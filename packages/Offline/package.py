@@ -22,10 +22,18 @@ class Offline(CMakePackage):
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
-    version("11.00.01", commit="67f7904d5")
     version("11.01.00", commit="1560c76")
+    version("11.00.01", commit="67f7904d5")
 
     variant("g4", default=False, description="Whether to build Geant4-dependent packages")
+
+    variant(
+        "cxxstd",
+        default="20",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
 
     # Direct dependencies, see ups/product_deps
     depends_on("geant4", when="+g4")
@@ -46,7 +54,7 @@ class Offline(CMakePackage):
     depends_on("root+tmva-sofie+spectrum+opengl")
 
     def cmake_args(self):
-        args = ["-DWANT_G4={0}".format("TRUE" if "+g4" in self.spec else "FALSE")]
+        args = [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"), "-DWANT_G4={0}".format("TRUE" if "+g4" in self.spec else "FALSE")]
         return args
 
     def setup_run_environment(self, env):
