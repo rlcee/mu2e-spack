@@ -41,6 +41,9 @@ class Offline(CMakePackage):
     depends_on("artdaq-core-mu2e")
     depends_on("art-root-io")
     depends_on("kinkal")
+
+    depends_on("kinkal@3:", when="@11.01.00:")
+
     depends_on("btrk")
     depends_on("gallery")
     depends_on("cry", when="+g4")
