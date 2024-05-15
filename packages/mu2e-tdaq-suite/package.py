@@ -66,7 +66,7 @@ class Mu2eTdaqSuite(BundlePackage):
         depends_on("otsdaq-mu2e-crv@v3_01_00")
         depends_on("otsdaq-mu2e-extmon@v3_01_00")
         depends_on("otsdaq-mu2e-stm@v3_01_00")
-        depends_on("Offline@11.01.00")
+        depends_on("Offline@11.02.00")
         depends_on("otsdaq-mu2e-tracker@v3_01_00")
         depends_on("otsdaq-mu2e-dqm@v3_01_00")
         depends_on("otsdaq-mu2e-trigger@v3_01_00")
