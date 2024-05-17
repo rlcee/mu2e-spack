@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack.package import *
+import os
 
 
 def sanitize_environments(env, *vars):
@@ -23,6 +24,7 @@ class OtsdaqMu2eExtmon(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_01_00", commit="eb43178079085ce12a7c6456a0c56cec55b072a2")
     version("v3_00_00", commit="5b9c8e67480435dedcfa20724e3c707fcf508f1e")
     version("v1_04_00", sha256="ee06ffed0f1e013a83be9d7387339b8353f8b53db4ed299dc9dd96ce2d8649a9")
 
@@ -30,8 +32,26 @@ class OtsdaqMu2eExtmon(CMakePackage):
         url = "https://github.com/Mu2e/otsdaq_mu2e_extmon/archive/refs/tags/{0}.tar.gz"
         return url.format(version)
 
+    variant(
+        "cxxstd",
+        default="20",
+        values=("14", "17", "20"),
+        multi=False,
+        description="Use the specified C++ standard when building.",
+    )
+
     depends_on("otsdaq-mu2e")
     depends_on("cetmodules", type="build")
+
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ]
+        if os.path.exists("CMakePresets.cmake"):
+            args.extend(["--preset", "default"])
+        else:
+            self.define("artdaq_core_OLD_STYLE_CONFIG_VARS", True)
+        return args
 
     def setup_run_environment(self, env):
         prefix = self.prefix

@@ -33,6 +33,7 @@ class ArtdaqCoreMu2e(CMakePackage):
 
     version("develop", branch="develop", get_full_repo=True)
 
+    version("v3_01_00", commit="ee419440459a7343692ae6042dcbc6653b59b8c5")
     version("v3_00_00", commit="2dcbb50e8495f616c1164a6514371b8314e11b7a")
     version("v2_01_02", sha256="cb492dcd67c1676bc78cf251f3541fc583625f8b71f9486e29603f8a104de531")
     version("v1_09_02", sha256="4a2789b7a2bcff2a30b70562e5543d73f503e02eb6a990aa6bb80ceeec614cbf")
@@ -46,7 +47,7 @@ class ArtdaqCoreMu2e(CMakePackage):
 
     variant(
         "cxxstd",
-        default="17",
+        default="20",
         values=("14", "17", "20"),
         multi=False,
         description="Use the specified C++ standard when building.",
@@ -57,6 +58,16 @@ class ArtdaqCoreMu2e(CMakePackage):
     depends_on("mu2e-pcie-utils@:v2_09_00", when="@:v1_09_02")
     depends_on("artdaq-core")
 
+    def cmake_args(self):
+        args = [
+            self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd"),
+        ]
+        if os.path.exists("CMakePresets.cmake"):
+            args.extend(["--preset", "default"])
+        else:
+            self.define("artdaq_core_OLD_STYLE_CONFIG_VARS", True)
+        return args
+    
     def setup_run_environment(self, env):
         prefix = self.prefix
         # Ensure we can find plugin libraries.
