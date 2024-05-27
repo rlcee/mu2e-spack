@@ -67,11 +67,11 @@ class Offline(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Ensure we can find fhicl files
         env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+        env.prepend_path("MU2E_SEARCH_PATH", "/cvmfs/mu2e.opensciencegrid.org/DataFiles")
         env.prepend_path("MU2E_SEARCH_PATH", prefix + "/fcl")
-        # Ensure we can find data files
-        env.prepend_path("MU2E_DATA_PATH", prefix + "/share")
+        env.prepend_path("MU2E_SEARCH_PATH", prefix + "/share")
         # Cleaup.
-        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH", "MU2E_SEARCH_PATH", "MU2E_DATA_PATH")
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH", "MU2E_SEARCH_PATH")
 
     def setup_dependent_run_environment(self, env, dependent_spec):
         prefix = self.prefix
