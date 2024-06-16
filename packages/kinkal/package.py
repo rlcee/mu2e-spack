@@ -11,10 +11,13 @@ class Kinkal(CMakePackage):
 
     homepage = "https://github.com/KFTrack/KinKal#readme"
     url = "https://github.com/KFTrack/KinKal/archive/refs/tags/v2.4.2.tar.gz"
+    git = "https://github.com/KFTrack/KinKal"
 
     # notify when the package is updated.
     # maintainers("github_user1", "github_user2")
     maintainers = ['mengel']
+
+    version("main", branch="main", get_full_repo=True)
 
     version("3.0.1", sha256="0185f88b9e8e346b5d6ba03763c2ebc8640d345564e3215c7821f0741a5ae3b9")
     version("3.0.0", sha256="690c68303c464e11817c145aa7d3bb2ec21f41e003b1d045e1ad1c840055a93f")
@@ -56,16 +59,21 @@ class Kinkal(CMakePackage):
     @run_before('build')
     def makelink(self):
         with working_dir(self.stage.path):
-            os.symlink('%s/spack-src' % self.stage.path, '%s/KinKal' % self.stage.path)
+            if os.path.isdir("spack-src") :
+                tdir = '%s/spack-src' % self.stage.path
+                linkname = '%s/KinKal' % self.stage.path
+            else :
+                tdir = self.stage.path
+                linkname = '%s/../KinKal' % self.stage.path
+            if not os.path.islink(linkname) :
+                os.symlink(tdir, linkname)
 
     @run_after('install')
     def copy_headers(self):
+        if self.version >= Version("3.0.0"):
+            return
         with working_dir(self.stage.path):
             copy('%s/spack-src/General/PhysicalConstants.h' % self.stage.path,
-                    '%s/include/KinKal/General/PhysicalConstants.h' % self.prefix)
+                 '%s/include/KinKal/General/PhysicalConstants.h' % self.prefix)
             copy('%s/spack-src/General/SystemOfUnits.h' % self.stage.path,
-                    '%s/include/KinKal/General/SystemOfUnits.h' % self.prefix)
-
-    def setup_dependent_run_environment(self, env, dep_env):
-        prefix=self.prefix
-        env.set("KINKAL_INC", prefix.include)
+                 '%s/include/KinKal/General/SystemOfUnits.h' % self.prefix)
