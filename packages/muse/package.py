@@ -16,6 +16,9 @@ class Muse(Package):
     git = "https://github.com/Mu2e/Muse.git"
     maintainers = ["rlcee", "kutschke"]
 
+    version("4.13.4", sha256="03355e801787377f68047205b8740130c73fa16085661caeb7cef78c884c28c4")
+    version("4.13.3", sha256="8618c56a1e52820d7f1e808a51b3588bda4021abb4645c7e596f06c86794455d")
+    version("4.13.2", sha256="1570edd1dda5d1c860a275a31aa82587b764aef18d788b66a90eb6bcb2365257")
     version("4.13.1", sha256="6326b161655c3406619a89131452a8132cdf6fa8c77073fb47324fe3a2aae831")
     version("4.13.0",  sha256="35006e6a8d660143153496bd2dd074f4d285b19570aa1978a1091d6a6032ad91")
     version("4.12.0",  sha256="9ac1e979f0c6346889879bf5660e09752ccf892a0ee4b026db897c0d84deff10")
