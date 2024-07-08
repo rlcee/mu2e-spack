@@ -24,6 +24,7 @@ class OtsdaqMu2eDqm(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_02_00", commit="c2f4fd5f94cadf8cee755f112dac74a41c1d2612")
     version("v3_01_00", commit="737a5b86614b096f1c29e2655fb20d7bd4a2f7a1")
     version("v3_00_00", commit="793461d0c8baf93c0e5fa2fbf9b29c119517d6e3")
     version("v1_04_00", sha256="363762bd66604d961dd6ec1f4f8cc5651e937456153806b942744ffe1d5246a0")

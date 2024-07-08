@@ -25,6 +25,7 @@ class Mu2eTrigConfig(CMakePackage):
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
+    version("v3_02_00", commit="667dc545953b59ed377c7e99bf9de87ce8b9da3c")  
     version("v3_01_00", commit="2eb0afc3be6b1895ad4a927cea30c233e2c08fdc")    
     version("v01_02_00", commit="25933fed70415367ad6ef1fd3c857bcc66e3bc24")
 
