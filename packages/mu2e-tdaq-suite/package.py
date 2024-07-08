@@ -52,7 +52,7 @@ class Mu2eTdaqSuite(BundlePackage):
             multi=False,
             description="Otsdaq version to use",
     )
-    depends_on("otsdaq-uiste@v2_08_02", when="otsdaq=20802")    
+    depends_on("otsdaq-suite@v2_08_02", when="otsdaq=20802")    
     depends_on("otsdaq-suite@v2_08_01", when="otsdaq=20801")
     depends_on("otsdaq-suite@v2_08_00", when="otsdaq=20800")
     depends_on("otsdaq-suite@v2_07_00", when="otsdaq=20700")
