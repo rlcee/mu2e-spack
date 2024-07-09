@@ -60,6 +60,8 @@ class Mu2eTdaqSuite(BundlePackage):
     depends_on("otsdaq-suite@v2_06_08", when="otsdaq=20608")
     depends_on("otsdaq-suite")
 
+    variant("g4", default=False, description="Whether to build the G4 variant of the Offline")
+
     with when("@v3_02_00"):
         depends_on("artdaq-core-mu2e@v3_02_00")
         depends_on("mu2e-pcie-utils@v3_02_00")
@@ -69,7 +71,8 @@ class Mu2eTdaqSuite(BundlePackage):
         depends_on("otsdaq-mu2e-crv@v3_02_00")
         depends_on("otsdaq-mu2e-extmon@v3_02_00")
         depends_on("otsdaq-mu2e-stm@v3_02_00")
-        depends_on("Offline@11.02.00")
+        depends_on("Offline@11.02.00~g4", when="~g4")
+        depends_on("Offline@11.02.00+g4", when="+g4")
         depends_on("otsdaq-mu2e-tracker@v3_02_00")
         depends_on("otsdaq-mu2e-dqm@v3_02_00")
         depends_on("otsdaq-mu2e-trigger@v3_02_00")
