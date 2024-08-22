@@ -77,3 +77,27 @@ class Kinkal(CMakePackage):
                  '%s/include/KinKal/General/PhysicalConstants.h' % self.prefix)
             copy('%s/spack-src/General/SystemOfUnits.h' % self.stage.path,
                  '%s/include/KinKal/General/SystemOfUnits.h' % self.prefix)
+
+    def setup_run_environment(self, env):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("KINKAL_LIB", prefix.lib64)
+        env.set("KINKAL_INC", prefix.include)
+
+    def setup_dependent_run_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("KINKAL_LIB", prefix.lib64)
+        env.set("KINKAL_INC", prefix.include)
+
+    def setup_build_environment(self, env):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("KINKAL_LIB", prefix.lib64)
+        env.set("KINKAL_INC", prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("KINKAL_LIB", prefix.lib64)
+        env.set("KINKAL_INC", prefix.include)

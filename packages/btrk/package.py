@@ -60,6 +60,24 @@ class Btrk(SConsPackage):
         for f in headerlist.headers:
              install(f, join_path(prefix.include, os.path.relpath(f,self.stage.source_path)))
 
+    def setup_run_environment(self, env):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("BTRK_LIB", prefix.lib)
+        env.set("BTRK_INC", prefix.include)
+
+    def setup_dependent_run_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("BTRK_LIB", prefix.lib)
+        env.set("BTRK_INC", prefix.include)
+
+    def setup_dependent_build_environment(self, env, dependent_spec):
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("BTRK_LIB", prefix.lib)
+        env.set("BTRK_INC", prefix.include)
+
     def setup_build_environment(self, env):
         env.append_path("PYTHONPATH", "%s/spack-src/python" % self.stage.path)
         env.set("BUILD_BASE", "%s/build" % self.stage.path)
@@ -69,3 +87,7 @@ class Btrk(SConsPackage):
         env.set("ROOT_INC", "%s/include/root" % self.spec["root"].prefix)
         env.set("GCC_VERSION", "{}".format(self.spec.compiler.version))
         env.set("DEBUG_LEVEL", "prof")
+        prefix = self.prefix
+        # Emulate UPS variables
+        env.set("BTRK_LIB", prefix.lib)
+        env.set("BTRK_INC", prefix.include)
