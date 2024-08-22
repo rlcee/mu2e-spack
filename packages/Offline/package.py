@@ -22,6 +22,7 @@ class Offline(CMakePackage):
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
+    version("develop", branch="main", get_full_repo=True) # spack-mpd expects develop version
     version("11.02.00", commit="83ca01342f4ad86c4452babbb8a7083412dcfa88")
     version("11.01.00", commit="1560c76")
     version("11.00.01", commit="67f7904d5")
