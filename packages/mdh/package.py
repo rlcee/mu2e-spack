@@ -15,7 +15,8 @@ class Mdh(Package):
     git = "https://github.com/Mu2e/mdh.git"
     maintainers = ["rlcee", "kutschke"]
 
-
+    version("1.7.0", sha256="aa92f1fde4d627871992f59f3ea4ec0b5f6a0cdcae94ef923bd6602a743a0874")
+    version("1.6.0", sha256="776c9f2484065b32999b2b4e2501bbdce2f877ecd259ef2e02974a8d688f9271")
     version("1.5.0", sha256="9dd6934b7c322e0e51ea16a5aa7d8fe9d69401db9e4fb7c63377ac387d6c0fab")
     version("1.4.0", sha256="5b1f691ceac32f662ef8e5be35f7f656543565f4c604ad7633746f391681e9ea")
     version("1.3.1", sha256="8a45c234bc0ac98183356095d38aff544832f332a8d6ca3161c51935405e92c4")
