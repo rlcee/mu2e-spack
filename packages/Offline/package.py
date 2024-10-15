@@ -45,6 +45,7 @@ class Offline(CMakePackage):
     depends_on("kinkal")
 
     depends_on("kinkal@3:", when="@11.01.00:")
+    depends_on("kinkal@3.0.1", when="@11.02.00")
 
     depends_on("btrk")
     depends_on("gallery")
