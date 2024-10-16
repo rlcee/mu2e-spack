@@ -7,10 +7,12 @@
 from spack.package import *
 import os
 
+
 def sanitize_environments(env, *vars):
     for var in vars:
         env.prune_duplicate_paths(var)
         env.deprioritize_system_paths(var)
+
 
 class Mu2eTrigConfig(CMakePackage):
     """Trigger configurations for the Mu2e experiment"""
@@ -25,11 +27,13 @@ class Mu2eTrigConfig(CMakePackage):
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
-    version("develop", branch="develop", get_full_repo=True) # spack-mpd expects develop version
-    version("v3_02_00", commit="667dc545953b59ed377c7e99bf9de87ce8b9da3c")  
-    version("v3_01_00", commit="2eb0afc3be6b1895ad4a927cea30c233e2c08fdc")    
+    version(
+        "develop", branch="develop", get_full_repo=True
+    )  # spack-mpd expects develop version
+    version("v3_03_00", commit="81759c02641607a4792235bca47c156f1e5b1d64")
+    version("v3_02_00", commit="667dc545953b59ed377c7e99bf9de87ce8b9da3c")
+    version("v3_01_00", commit="2eb0afc3be6b1895ad4a927cea30c233e2c08fdc")
     version("v01_02_00", commit="25933fed70415367ad6ef1fd3c857bcc66e3bc24")
-
 
     def url_for_version(self, version):
         url = "https://github.com/Mu2e/mu2e_pcie_utils/archive/refs/tags/{0}.tar.gz"
@@ -45,7 +49,9 @@ class Mu2eTrigConfig(CMakePackage):
         # Ensure we can find data files
         env.prepend_path("MU2E_DATA_PATH", prefix + "/share")
         # Cleaup.
-        sanitize_environments(env, "FHICL_FILE_PATH", "MU2E_SEARCH_PATH", "MU2E_DATA_PATH")
+        sanitize_environments(
+            env, "FHICL_FILE_PATH", "MU2E_SEARCH_PATH", "MU2E_DATA_PATH"
+        )
 
     def setup_dependent_run_environment(self, env, dependent_spec):
         prefix = self.prefix
@@ -55,4 +61,6 @@ class Mu2eTrigConfig(CMakePackage):
         # Ensure we can find data files
         env.prepend_path("MU2E_DATA_PATH", prefix + "/share")
         # Cleaup.
-        sanitize_environments(env, "FHICL_FILE_PATH", "MU2E_SEARCH_PATH", "MU2E_DATA_PATH")
+        sanitize_environments(
+            env, "FHICL_FILE_PATH", "MU2E_SEARCH_PATH", "MU2E_DATA_PATH"
+        )

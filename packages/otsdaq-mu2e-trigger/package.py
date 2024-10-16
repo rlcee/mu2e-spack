@@ -23,6 +23,7 @@ class OtsdaqMu2eTrigger(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_03_00", commit="e5a81b80574a3f9f42f7db289ddea715279cbdd5")
     version("v3_02_00", commit="c9454dd65511de02331f0e822e34c68e2665b7ff")
     version("v3_01_00", commit="10d134e1178895ddf51c5c9aae97e15ebb703740")
     version("v3_00_00", commit="a3b1c45cf41ffc92f455ca5eb07d9623d7f7a4fc")

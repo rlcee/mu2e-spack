@@ -23,6 +23,7 @@ class OtsdaqMu2eCalorimeter(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_03_00", commit="2abf5f4f2e88fed5b8f68a4c65b6916809a07a31")
     version("v3_02_00", commit="28d8a50d574ad4dc6b7638dd2f8a47b0c74b940d")
     version("v3_01_00", commit="a48e8f6cbec21e71b48a9c28095cb37a6ab70ea4")
     version("v3_00_00", commit="196933cfc47d5f9d214218fbc7d8e08bf2569f67")
@@ -59,8 +60,10 @@ class OtsdaqMu2eCalorimeter(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Ensure we can find fhicl files
         env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+
+        env.prepend_path("MU2E_CALORIMETER_CONFIG_PATH", prefix + "/boardConfig")
         # Cleaup.
-        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH", "MU2E_CALORIMETER_CONFIG_PATH")
 
     def setup_dependent_run_environment(self, env, dependent_spec):
         prefix = self.prefix
@@ -68,5 +71,7 @@ class OtsdaqMu2eCalorimeter(CMakePackage):
         env.prepend_path("CET_PLUGIN_PATH", prefix.lib)
         # Ensure we can find fhicl files
         env.prepend_path("FHICL_FILE_PATH", prefix + "/fcl")
+
+        env.prepend_path("MU2E_CALORIMETER_CONFIG_PATH", prefix + "/boardConfig")
         # Cleaup.
-        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH")
+        sanitize_environments(env, "CET_PLUGIN_PATH", "FHICL_FILE_PATH", "MU2E_CALORIMETER_CONFIG_PATH")

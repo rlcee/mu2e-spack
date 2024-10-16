@@ -24,6 +24,7 @@ class OtsdaqMu2eExtmon(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+    version("v3_03_00", commit="fc794c683bdc4d352d595995555796d30f0c6a21")
     version("v3_02_00", commit="9e9127ad8d66048095b79af6359f9d5f1f66b2d3")
     version("v3_01_00", commit="eb43178079085ce12a7c6456a0c56cec55b072a2")
     version("v3_00_00", commit="5b9c8e67480435dedcfa20724e3c707fcf508f1e")
