@@ -23,7 +23,7 @@ class Mu2eTdaqSuite(BundlePackage):
     squals = ("112", "117", "118", "122", "123", "126", "128", "130", "131", "132")
     variant(
         "s",
-        default="0",
+        default="132",
         values=("0",) + squals,
         multi=False,
         description="Art suite version to use",
@@ -34,11 +34,12 @@ class Mu2eTdaqSuite(BundlePackage):
 
     variant(
         "artdaq",
-        default="0",
-        values=("0", "31202", "31203", "31207", "31300", "31301", "31400", "31401"),
+        default="31500",
+        values=("0", "31202", "31203", "31207", "31300", "31301", "31400", "31401", "31500"),
         multi=False,
         description="Artdaq suite version to use",
     )
+    depends_on("artdaq-suite@v3_15_00", when="artdaq=31500")
     depends_on("artdaq-suite@v3_14_01", when="artdaq=31401")
     depends_on("artdaq-suite@v3_14_00", when="artdaq=31400")
     depends_on("artdaq-suite@v3_13_01", when="artdaq=31301")
@@ -50,11 +51,12 @@ class Mu2eTdaqSuite(BundlePackage):
 
     variant(
         "otsdaq",
-        default="0",
-        values=("0", "20608", "20609", "20700", "20800", "20801", "20802", "20900"),
+        default="20901",
+        values=("0", "20608", "20609", "20700", "20800", "20801", "20802", "20900", "20901"),
         multi=False,
         description="Otsdaq version to use",
     )
+    depends_on("otsdaq-suite@v2_09_01", when="otsdaq=20901")
     depends_on("otsdaq-suite@v2_09_00", when="otsdaq=20900")
     depends_on("otsdaq-suite@v2_08_02", when="otsdaq=20802")
     depends_on("otsdaq-suite@v2_08_01", when="otsdaq=20801")
