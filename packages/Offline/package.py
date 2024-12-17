@@ -23,6 +23,7 @@ class Offline(CMakePackage):
 
     version("main", branch="main", get_full_repo=True)
     version("develop", branch="main", get_full_repo=True) # spack-mpd expects develop version
+    version("11.04.00", commit="86ef8c73e1683532cec252bbfe6fa64815a9d4d3")
     version("11.03.00", commit="57339a5a43a073c9657f221b1d96d5a7b3c48b4b")
     version("11.02.00", commit="83ca01342f4ad86c4452babbb8a7083412dcfa88")
     version("11.01.00", commit="1560c76")

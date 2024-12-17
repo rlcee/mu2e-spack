@@ -20,6 +20,7 @@ class Mu2eTdaqSuite(BundlePackage):
     version("v1_02_03")
     version("v1_02_02")
 
+    # The art-suite Dependency
     squals = ("112", "117", "118", "122", "123", "126", "128", "130", "131", "132")
     variant(
         "s",
@@ -32,6 +33,7 @@ class Mu2eTdaqSuite(BundlePackage):
         depends_on(f"art-suite@s{squal}+root", when=f"s={squal}")
     depends_on("art-suite+root", when="s=0")
 
+    # The artdaq Dependency
     variant(
         "artdaq",
         default="31500",
@@ -49,6 +51,7 @@ class Mu2eTdaqSuite(BundlePackage):
     depends_on("artdaq-suite@v3_12_02", when="artdaq=31202")
     depends_on("artdaq-suite+db+epics~demo~pcp")
 
+    # The otsdaq Dependency
     variant(
         "otsdaq",
         default="20901",
@@ -66,12 +69,29 @@ class Mu2eTdaqSuite(BundlePackage):
     depends_on("otsdaq-suite@v2_06_08", when="otsdaq=20608")
     depends_on("otsdaq-suite")
 
+    # g4 Variant
     variant(
         "g4",
         default=False,
         description="Whether to build the G4 variant of the Offline",
     )
 
+    # Bundle package, list packages that are part of the bundle
+    with when("@v3_03_01"):
+        depends_on("artdaq-core-mu2e@v3_03_01")
+        depends_on("mu2e-pcie-utils@v3_03_01")
+        depends_on("artdaq-mu2e@v3_03_01")
+        depends_on("otsdaq-mu2e@v3_03_01")
+        depends_on("otsdaq-mu2e-calorimeter@v3_03_01")
+        depends_on("otsdaq-mu2e-crv@v3_03_01")
+        depends_on("otsdaq-mu2e-extmon@v3_03_01")
+        depends_on("otsdaq-mu2e-stm@v3_03_01")
+        depends_on("Offline@11.04.00~g4", when="~g4")
+        depends_on("Offline@11.04.00+g4", when="+g4")
+        depends_on("otsdaq-mu2e-tracker@v3_03_01")
+        depends_on("otsdaq-mu2e-dqm@v3_03_01")
+        depends_on("otsdaq-mu2e-trigger@v3_03_01")
+        depends_on("mu2e-trig-config@v3_03_01")
     with when("@v3_03_00"):
         depends_on("artdaq-core-mu2e@v3_03_00")
         depends_on("mu2e-pcie-utils@v3_03_00")
