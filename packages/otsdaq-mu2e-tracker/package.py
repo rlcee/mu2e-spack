@@ -24,7 +24,7 @@ class OtsdaqMu2eTracker(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
-    version("v3_03_01", commit="643ae28e15a6ac542d5876eaca372984b44036be")
+    version("v3_03_01", commit="22cd17fe4aa21f82ee0f42682992a3c3c2e2dbf1")
     version("v3_03_00", commit="0911662b152a239faff831625985e8c30b6c8357")
     version("v3_02_00", commit="aca901c7655eee59bab3ca6b42ed354e8d7f7bac")
     version("v3_01_00", commit="e7b7abb733e00e8a97f31f02f87746fb29c4949e")
