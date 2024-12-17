@@ -12,6 +12,7 @@ class Mu2eTdaqSuite(BundlePackage):
     """The Mu2e TDAQ Suite, the software used for Mu2e trigger and data acquisition"""
 
     version("develop")
+    version("v3_03_01")
     version("v3_03_00")
     version("v3_02_00")
     version("v3_01_00")
