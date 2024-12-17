@@ -48,6 +48,7 @@ class Offline(CMakePackage):
 
     depends_on("kinkal@3:", when="@11.01.00:")
     depends_on("kinkal@3.0.1", when="@11.02.00")
+    depends_on("kinkal@3.1.4", when="@11.03.00")
     depends_on("kinkal@3.1.4", when="@develop") # UPDATE AS NEEDED
     depends_on("kinkal@3.1.4", when="@main") # UPDATE AS NEEDED
 
