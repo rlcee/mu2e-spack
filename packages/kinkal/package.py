@@ -13,12 +13,11 @@ class Kinkal(CMakePackage):
     url = "https://github.com/KFTrack/KinKal/archive/refs/tags/v2.4.2.tar.gz"
     git = "https://github.com/KFTrack/KinKal"
 
-    # notify when the package is updated.
-    # maintainers("github_user1", "github_user2")
-    maintainers = ['mengel']
+    maintainers = ['brownd1978','rlcee']
 
     version("main", branch="main", get_full_repo=True)
 
+    version("3.1.5", sha256="5a964a0a88a7b55b277524d4280c8b428841f6953e9b133adc1dd2f9e9bb1a17")
     version("3.1.4", sha256="04492cae4b473e75e4240ff76c590e6f0a7f9528da367e74b2041cf9c4b0fef2")
     version("3.1.3", sha256="7b465f7e788d42a5f0310dc31a38b32161ebe582fdc6f0ee178439b12e172fc6")
     version("3.1.2", sha256="4417844e7885825f1c51f23fa69312192a5bb6918aa43553d307b81b2347962f")
