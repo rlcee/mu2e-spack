@@ -37,11 +37,12 @@ class Mu2eTdaqSuite(BundlePackage):
     # The artdaq Dependency
     variant(
         "artdaq",
-        default="31500",
-        values=("0", "31202", "31203", "31207", "31300", "31301", "31400", "31401", "31500"),
+        default="31600",
+        values=("0", "31202", "31203", "31207", "31300", "31301", "31400", "31401", "31500", "31600"),
         multi=False,
         description="Artdaq suite version to use",
     )
+    depends_on("artdaq-suite@v3_16_00", when="artdaq=31600")
     depends_on("artdaq-suite@v3_15_00", when="artdaq=31500")
     depends_on("artdaq-suite@v3_14_01", when="artdaq=31401")
     depends_on("artdaq-suite@v3_14_00", when="artdaq=31400")
