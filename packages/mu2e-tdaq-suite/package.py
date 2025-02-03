@@ -56,11 +56,12 @@ class Mu2eTdaqSuite(BundlePackage):
     # The otsdaq Dependency
     variant(
         "otsdaq",
-        default="20901",
-        values=("0", "20608", "20609", "20700", "20800", "20801", "20802", "20900", "20901"),
+        default="21000",
+        values=("0", "20608", "20609", "20700", "20800", "20801", "20802", "20900", "20901", "21000"),
         multi=False,
         description="Otsdaq version to use",
     )
+    depends_on("otsdaq-suite@v2_10_00", when="otsdaq=21000")
     depends_on("otsdaq-suite@v2_09_01", when="otsdaq=20901")
     depends_on("otsdaq-suite@v2_09_00", when="otsdaq=20900")
     depends_on("otsdaq-suite@v2_08_02", when="otsdaq=20802")
