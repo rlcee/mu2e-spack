@@ -62,15 +62,22 @@ class Kinkal(CMakePackage):
 
     @run_before('build')
     def makelink(self):
-        with working_dir(self.stage.path):
-            if os.path.isdir("spack-src") :
-                tdir = '%s/spack-src' % self.stage.path
-                linkname = '%s/KinKal' % self.stage.path
-            else :
-                tdir = self.stage.path
-                linkname = '%s/../KinKal' % self.stage.path
-            if not os.path.islink(linkname) :
-                os.symlink(tdir, linkname)
+        # at some point the stage.path changed from the
+        # repo dir to /tmp
+        wdir = self.stage.path
+        if wdir[:4] == "/tmp" :
+            tdir = self.stage.source_path
+            linkname = '%s/../KinKal' % self.stage.source_path
+        else :
+            with working_dir(self.stage.path):
+                if os.path.isdir("spack-src") :
+                    tdir = '%s/spack-src' % self.stage.path
+                    linkname = '%s/KinKal' % self.stage.path
+                else :
+                    tdir = self.stage.path
+                    linkname = '%s/../KinKal' % self.stage.path
+        if not os.path.islink(linkname) :
+            os.symlink(tdir, linkname)
 
     @run_after('install')
     def copy_headers(self):
