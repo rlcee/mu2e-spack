@@ -28,6 +28,7 @@ class Offline(CMakePackage):
     version("11.02.00", commit="83ca01342f4ad86c4452babbb8a7083412dcfa88")
     version("11.01.00", commit="1560c76")
     version("11.00.01", commit="67f7904d5")
+    version("10.36.00", commit="86ef8c73e1683532cec252bbfe6fa64815a9d4d3")
 
     variant("g4", default=True, description="Whether to build Geant4-dependent packages")
 
