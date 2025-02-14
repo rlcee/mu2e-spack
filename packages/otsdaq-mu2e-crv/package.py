@@ -24,6 +24,8 @@ class OtsdaqMu2eCrv(CMakePackage):
     license("BSD")
 
     version("develop", branch="develop", get_full_repo=True)
+
+    version("v3_04_00", commit="09d8ad6194ebb463721b019f83a947db018ba2fc")
     version("v3_03_01", commit="88d2661aa164ff54740765a327ae976ce964c72a")
     version("v3_03_00", commit="f7e1a8ef3f8710f5db961ec62ef78a28c50114f2")
     version("v3_02_00", commit="13b95db97eed103a563aa25631a8d86c536a88b1")
