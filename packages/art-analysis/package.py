@@ -15,14 +15,17 @@ class ArtAnalysis(CMakePackage):
     git = "https://github.com/Mu2e/ArtAnalysis"
     url = "https://github.com/Mu2e/ArtAnalysis/archive/refs/tags/v00_01_00.tar.gz"
 
-    maintainers("brownd1978","rlcee")
+    maintainers("brownd1978", "rlcee")
 
     license("Apache-2.0")
 
     version("main", branch="main", get_full_repo=True)
     version("develop", branch="main", get_full_repo=True)
 
-    version("00_01_00", sha256="102597a16d8428fb9cd8c61b43235503ca3aff0809f9805603df00534216bc87")
+    version(
+        "00_01_00",
+        sha256="102597a16d8428fb9cd8c61b43235503ca3aff0809f9805603df00534216bc87",
+    )
 
     variant(
         "cxxstd",
@@ -40,8 +43,8 @@ class ArtAnalysis(CMakePackage):
 
     def url_for_version(self, version):
         url = "https://github.com/Mu2e/EventNtuple/archive/refs/tags/v{:02d}_{:02d}_{:02d}.tar.gz"
-        aa = str(version.dotted).split('.')
-        return url.format(int(aa[0]),int(aa[1]),int(aa[2]))
+        aa = str(version.dotted).split(".")
+        return url.format(int(aa[0]), int(aa[1]), int(aa[2]))
 
     def cmake_args(self):
         return [self.define_from_variant("CMAKE_CXX_STANDARD", "cxxstd")]
