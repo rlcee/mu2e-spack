@@ -30,18 +30,27 @@ class G4beamline(CMakePackage):
 
     maintainers("oksuzian")
 
-    version("3.08b", sha256="6000e4811fa7263d5a7551fa6821640b5cd10e0bfea58d987f9a4df92500ad3f")
-    version("3.08a", sha256="27416645283b88bbbc9d464f11cbb86ee4c862ead83c3f83c3c004df92acf4cb")
-    version("3.08",  sha256="55519c23ed10c8430d4cc727ce4af7873f0abff93bb5ccf18d80a01e20b49c55")
+    version(
+        "3.08b",
+        sha256="6000e4811fa7263d5a7551fa6821640b5cd10e0bfea58d987f9a4df92500ad3f",
+    )
+    version(
+        "3.08a",
+        sha256="27416645283b88bbbc9d464f11cbb86ee4c862ead83c3f83c3c004df92acf4cb",
+    )
+    version(
+        "3.08",
+        sha256="55519c23ed10c8430d4cc727ce4af7873f0abff93bb5ccf18d80a01e20b49c55",
+    )
 
-    variant("gui",    default=False, description="Build the Qt-based GUI")
+    variant("gui", default=False, description="Build the Qt-based GUI")
     variant("visual", default=False, description="Build OpenGL visualization support")
 
     depends_on("cmake@3.16:", type="build")
     depends_on("geant4@11.0:11.2", when="@3.08:3.08a")
-    depends_on("geant4@11.3:",     when="@3.08b")
-    depends_on("geant4 +qt",       when="+gui")
-    depends_on("geant4 +opengl",   when="+visual")
+    depends_on("geant4@11.3:", when="@3.08b")
+    depends_on("geant4 +qt", when="+gui")
+    depends_on("geant4 +opengl", when="+visual")
     depends_on("root")
     depends_on("fftw")
     depends_on("gsl")
@@ -103,9 +112,9 @@ class CMakeBuilder(_SpackCMakeBuilder):
         # the spack prefixes explicitly.
         spec = self.pkg.spec
         return [
-            self.define_from_variant("G4BL_GUI",    "gui"),
+            self.define_from_variant("G4BL_GUI", "gui"),
             self.define_from_variant("G4BL_VISUAL", "visual"),
-            self.define("GSL_DIR",  spec["gsl"].prefix),
+            self.define("GSL_DIR", spec["gsl"].prefix),
             self.define("FFTW_DIR", spec["fftw"].prefix),
         ]
 
