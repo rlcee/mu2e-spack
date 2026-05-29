@@ -14,6 +14,9 @@ on:
     - cron: "0 7 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   check_whitespace_dispatch:
     name: Check Git whitespace
