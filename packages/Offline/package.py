@@ -79,14 +79,12 @@ class Offline(CMakePackage):
     depends_on("kinkal@3.6.0,develop", when="@develop")  # UPDATE AS NEEDED
     depends_on("kinkal@3.6.0,main", when="@main")  # UPDATE AS NEEDED
 
-    depends_on("btrk", when="@:13.00.09")
+    depends_on("btrk")
     depends_on("gallery")
     depends_on("cry", when="+g4")
     depends_on("swig", type="build")
     depends_on("gsl")
     depends_on("xerces-c")
-    depends_on("xgboost", when="@13.09.00:")
-    depends_on("mu2e-ort", when="@13.11.01:")
 
     # Indirect dependencies (But still required by CMake)
     depends_on("postgresql")
